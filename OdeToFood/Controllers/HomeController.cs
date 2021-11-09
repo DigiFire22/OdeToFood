@@ -18,9 +18,23 @@ namespace OdeToFood.Controllers
             _logger = logger;
         }
 
+        public HomeController()
+        {
+        }
+
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult About()
+        {
+            var model = new AboutModel()
+            {
+                Name = "Sten",
+                Location = "Tallinn"
+            };
+            return View(model);
         }
 
         public IActionResult Privacy()
