@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OdeToFood;
 using OdeToFood.Controllers;
-using System.Threading.Tasks;
+using System.Web.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace OdeToFood.Tests.Controllers
 {
@@ -16,7 +12,10 @@ namespace OdeToFood.Tests.Controllers
         [TestMethod]
         public void About()
         {
-            HomeController controller = new HomeController();
+            using var logFactory = LoggerFactory.Create(builder =>
+            builder.AddConsole());
+            var logger = logFactory.CreateLogger<HomeController>();
+            HomeController controller = new HomeController(logger);
             ViewResult result = controller.About() as ViewResult;
             Assert.IsNotNull(result.Model);
         }
