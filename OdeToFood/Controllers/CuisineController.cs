@@ -11,7 +11,7 @@ namespace OdeToFood.Controllers
     {
         public IActionResult Search(string name = "french")
         {
-            return RedirectToRoute("Default");
+            return RedirectToAction("Index", "Home", new { name = name});
         }
     }
 }
