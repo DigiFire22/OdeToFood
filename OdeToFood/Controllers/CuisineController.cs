@@ -9,9 +9,9 @@ namespace OdeToFood.Controllers
 {
     public class CuisineController : Controller
     {
-        public IActionResult Search(string name)
+        public IActionResult Search(string name = "french")
         {
-            return Content(name);
+            return RedirectToRoute("Default");
         }
     }
 }
