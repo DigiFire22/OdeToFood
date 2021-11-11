@@ -62,6 +62,10 @@ namespace OdeToFood
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                "Cuisine", "cuisine/{name?}",
+                new { controller = "cuisine", action = "search" }
+                );
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
