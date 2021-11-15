@@ -12,14 +12,8 @@ namespace OdeToFood.Controllers
         [HttpPost]
         public IActionResult Search(string name = "french")
         {
+            throw new Exception("Something terrible has happend!");
             return Content("Esimene" + name);
-        }
-
-        //[ActionName("otsi")]
-        [HttpGet]
-        public IActionResult Search(string name, Boolean notused)
-        {
-            return Content("Search!");
         }
     }
 }
