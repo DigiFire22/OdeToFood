@@ -6,3 +6,14 @@
     <h1 class="display-4">Welcome</h1>
     <p>@ViewBag.Message</p>
 </div>
+
+@model IEnumerable<Restaurant>
+
+@{ 
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach (var item in Model) 
+{ 
+    
+}
