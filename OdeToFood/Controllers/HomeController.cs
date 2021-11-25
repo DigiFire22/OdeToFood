@@ -13,23 +13,19 @@ namespace OdeToFood.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private ApplicationDbContext context;
+        private ApplicationDbContext _context;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
-            this.context = context;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            var controller = RouteData.Values["controller"];
-            var Action = RouteData.Values["Action"];
-            var id = RouteData.Values["id"];
+            var model = _context.Restaurants.ToList();
 
-            ViewBag.Message = $"{controller}::{Action} {id}"; 
-
-            return View();
+            return View(model);
         }
 
         public IActionResult About()
