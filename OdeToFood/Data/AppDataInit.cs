@@ -8,7 +8,7 @@ namespace OdeToFood.Data
 {
     public class AppDataInit
     {
-        public static void seedRestaurant(ApplicationDbContext context)
+        public static void SeedRestaurant(ApplicationDbContext context)
         {
             if (!context.Restaurants.Any())
             {
@@ -18,6 +18,14 @@ namespace OdeToFood.Data
                         Name = "McDonalds",
                         City = "Tallinn",
                         Country = "Estonia",
+                        Review = new List<RestarauntReview>()
+                        {
+                            new RestarauntReview()
+                            {
+                                Rating = 10,
+                                Body = "It's Shit"
+                            }
+                        }
                     });
                 context.Restaurants.Add(
                     new Restaurant
