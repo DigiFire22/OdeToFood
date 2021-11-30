@@ -21,30 +21,21 @@ namespace OdeToFood.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string searchTerm = null)
         {
-            //var model =
-            //    from r in _context.Restaurants
-            //    orderby r.Review.Average(review => review.Rating) descending
-            //    Select new RestaurantListViewModel
-            //    {
-            //        Id = r.Id,
-            //        Name = r.Name,
-            //        City = r.City,
-            //        Country = r.Country,
-            //        CountOfReviews = r.Review.Count
-            //    };
             var model = _context.Restaurants.OrderByDescending(r => r.Review.Average(review => review.Rating))
+            .Where(r => searchTerm == null || r.Name.Contains(searchTerm))
             .Take(10)
             .Select(r => new RestaurantListViewModel
             {
-                Id = r.Id,
-                Name = r.Name,
-                City = r.City,
-                Country = r.Country,
-                CountOfReviews = r.Review.Count
+            Id = r.Id,
+            Name = r.Name,
+            City = r.City,
+            Country = r.Country,
+            CountOfReviews = r.Review.Count
             });
             return View(model);
+
         }
 
         public IActionResult About()

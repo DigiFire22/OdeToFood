@@ -32,7 +32,6 @@ namespace OdeToFood
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging());
             services.AddDatabaseDeveloperPageExceptionFilter();
-
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
@@ -94,9 +93,9 @@ namespace OdeToFood
                 {
                     if(e.Message.Contains("The login failed.")) { break; }
                     System.Threading.Thread.Sleep(1000);
-                    AppDataInit.SeedRestaurant(context);
                 }
             }
+            AppDataInit.SeedRestaurant(context);
         }
     }
 }

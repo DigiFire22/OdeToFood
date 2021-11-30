@@ -8,6 +8,7 @@ namespace OdeToFood.Data
 {
     public class AppDataInit
     {
+        
         public static void SeedRestaurant(ApplicationDbContext context)
         {
             if (!context.Restaurants.Any())
@@ -33,6 +34,14 @@ namespace OdeToFood.Data
                         Name = "Hesburger",
                         City = "Tallinn",
                         Country = "Estonia",
+                        Review = new List<RestarauntReview>()
+                        {
+                            new RestarauntReview()
+                            {
+                                Rating = 10,
+                                Body = "It's Not Bad"
+                            }
+                        }
                     });
                 context.Restaurants.Add(
                     new Restaurant
@@ -40,6 +49,14 @@ namespace OdeToFood.Data
                         Name = "BabyBack Ribs & BBQ",
                         City = "Tallinn",
                         Country = "Estonia",
+                        Review = new List<RestarauntReview>()
+                        {
+                            new RestarauntReview()
+                            {
+                                Rating = 10,
+                                Body = "It's Perfection"
+                            }
+                        }
                     });
                 context.Restaurants.Add(
                     new Restaurant
@@ -47,7 +64,16 @@ namespace OdeToFood.Data
                         Name = "Burger King",
                         City = "Stockholm",
                         Country = "Finland",
+                        Review = new List<RestarauntReview>()
+                        {
+                            new RestarauntReview()
+                            {
+                                Rating = 10,
+                                Body = "It's Okay"
+                            }
+                        }
                     });
+                context.SaveChanges();
             }
         }
     }
