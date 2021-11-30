@@ -1,130 +1,30 @@
-﻿//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using OdeToFood.Models;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using OdeToFood.Data;
+using OdeToFood.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-//namespace OdeToFood.Controllers
-//{
-//    public class ReviewsController : Controller
-//    {
-//        // GET: ReviewsController
-//        public ActionResult Index()
-//        {
-//            var model =
-//                from r in _reviews
-//                orderby r.Country
-//                select r;
-
-//            return View(model);
-//        }
-
-//        // GET: ReviewsController/Details/5
-//        public ActionResult Details(int id)
-//        {
-//            return View();
-//        }
-
-//        // GET: ReviewsController/Create
-//        public ActionResult Create()
-//        {
-//            return View();
-//        }
-
-//        // POST: ReviewsController/Create
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public ActionResult Create(IFormCollection collection)
-//        {
-//            try
-//            {
-//                return RedirectToAction(nameof(Index));
-//            }
-//            catch
-//            {
-//                return View();
-//            }
-//        }
-
-//        // GET: ReviewsController/Edit/5
-//        public ActionResult Edit(int id)
-//        {
-//            var review = _reviews.Single(r => r.Id == id);
-//            return View(review);
-//        }
-
-//        // POST: ReviewsController/Edit/5
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public async Task<ActionResult> Edit(int id, IFormCollection collection)
-//        {
-//            var review = _reviews.Single(r => r.Id == id);
-//            if(await TryUpdateModelAsync(review))
-//            {
-//                return RedirectToAction("Index");
-//            }
-//            return View(review);
-//        }
-
-//        // GET: ReviewsController/Delete/5
-//        public ActionResult Delete(int id)
-//        {
-//            return View();
-//        }
-
-//        // POST: ReviewsController/Delete/5
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public ActionResult Delete(int id, IFormCollection collection)
-//        {
-//            try
-//            {
-//                return RedirectToAction(nameof(Index));
-//            }
-//            catch
-//            {
-//                return View();
-//            }
-//        }
-//        public static List<RestarauntReview> _reviews = new List<RestarauntReview>
-//        {
-//            new RestarauntReview
-//            {
-//                Id = 1,
-//                Name = "McDonalds",
-//                City = "Tallinn",
-//                Country = "Estonia",
-//                Rating = 10,
-//            },
-
-//            new RestarauntReview
-//            {
-//                Id = 2,
-//                Name = "Hesburger",
-//                City = "Tallinn",
-//                Country = "Estonia",
-//                Rating = 10,
-//            },
-
-//            new RestarauntReview
-//            {
-//                Id = 3,
-//                Name = "BabyBack Ribs & BBQ",
-//                City = "Tallinn",
-//                Country = "Estonia",
-//                Rating = 10,
-//            },
-
-//            new RestarauntReview
-//            {
-//                Id = 4,
-//                Name = "Burger King",
-//                City = "Stockholm",
-//                Country = "Finland",
-//                Rating = 10,
-//            }
-//        };
-//    }
-//}
+namespace OdeToFood.Controllers
+{
+    public class ReviewsController : Controller
+    {
+        private readonly ApplicationDbContext _Context;
+       public ReviewsController(ApplicationDbContext context)
+        {
+            _Context = context;
+        }
+        // GET: ReviewsController
+        public ActionResult Index([Bind(Prefix = "Id")] int restaurantId)
+        {
+            var model = _Context.Restaurants.Find(restaurantId);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
+        }
+    }
+}
