@@ -26,5 +26,22 @@ namespace OdeToFood.Controllers
             }
             return View(model);
         }
+        [HttpGet]
+        public ActionResult Create(int restaurantId)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(RestarauntReview review)
+        {
+            if (ModelState.IsValid)
+            {
+                _Context.Reviews.Add(review);
+                _Context.SaveChanges();
+                return RedirectToAction(nameof(Index), new { Id = review.RestaurantId });
+            }
+            return View(review);
+        }
     }
 }
