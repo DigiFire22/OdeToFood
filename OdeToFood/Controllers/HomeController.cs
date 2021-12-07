@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCore.Unobtrusive.Ajax;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OdeToFood.Data;
 using OdeToFood.Models;
@@ -34,8 +36,13 @@ namespace OdeToFood.Controllers
             Country = r.Country,
             CountOfReviews = r.Review.Count
             });
-            return View(model);
 
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_Restaurants", model);
+            }
+
+            return View(model);
         }
 
         public IActionResult About()

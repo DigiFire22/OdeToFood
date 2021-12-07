@@ -8,15 +8,17 @@ namespace OdeToFood.Data
 {
     public class AppDataInit
     {
-        
+
         public static void SeedRestaurant(ApplicationDbContext context)
         {
             if (!context.Restaurants.Any())
             {
-                context.Restaurants.Add(
+                for (int i = 1; i <= 1000; i++)
+                {
+                    context.Restaurants.Add(
                     new Restaurant
                     {
-                        Name = "McDonalds",
+                        Name = $"McDonalds {i}",
                         City = "Tallinn",
                         Country = "Estonia",
                         Review = new List<RestarauntReview>()
@@ -28,10 +30,10 @@ namespace OdeToFood.Data
                             }
                         }
                     });
-                context.Restaurants.Add(
+                    context.Restaurants.Add(
                     new Restaurant
                     {
-                        Name = "Hesburger",
+                        Name = $"Hesburger{i}",
                         City = "Tallinn",
                         Country = "Estonia",
                         Review = new List<RestarauntReview>()
@@ -43,37 +45,38 @@ namespace OdeToFood.Data
                             }
                         }
                     });
-                context.Restaurants.Add(
-                    new Restaurant
-                    {
-                        Name = "BabyBack Ribs & BBQ",
-                        City = "Tallinn",
-                        Country = "Estonia",
-                        Review = new List<RestarauntReview>()
+                    context.Restaurants.Add(
+                        new Restaurant
                         {
+                            Name = $"BabyBack Ribs & BBQ{i}",
+                            City = "Tallinn",
+                            Country = "Estonia",
+                            Review = new List<RestarauntReview>()
+                            {
                             new RestarauntReview()
                             {
                                 Rating = 10,
                                 Body = "It's Perfection"
                             }
-                        }
-                    });
-                context.Restaurants.Add(
-                    new Restaurant
-                    {
-                        Name = "Burger King",
-                        City = "Stockholm",
-                        Country = "Finland",
-                        Review = new List<RestarauntReview>()
+                            }
+                        });
+                    context.Restaurants.Add(
+                        new Restaurant
                         {
+                            Name = $"Burger King{i}",
+                            City = "Stockholm",
+                            Country = "Finland",
+                            Review = new List<RestarauntReview>()
+                            {
                             new RestarauntReview()
                             {
                                 Rating = 10,
                                 Body = "It's Okay"
                             }
-                        }
-                    });
-                context.SaveChanges();
+                            }
+                        });
+                    context.SaveChanges();
+                }
             }
         }
     }
