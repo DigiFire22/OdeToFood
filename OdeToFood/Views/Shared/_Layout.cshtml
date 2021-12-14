@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/jqueryui/jquery-ui.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/pagedList.css" />
 </head>
 <body>
     <header>
@@ -29,9 +30,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Reviews" asp-action="Index">Reviews</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Restaurants" asp-action="Index">Restaurants</a>
                         </li>
                     </ul>
@@ -45,11 +43,8 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-        <div>
-            
-        </div>
+        @*<div>@await Component.InvokeAsync("BestReview")</div>*@
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2021 - OdeToFood - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -58,6 +53,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jqueryui/jquery-ui.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     @Html.RenderUnobtrusiveAjaxScript()
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
